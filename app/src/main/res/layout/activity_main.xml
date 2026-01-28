@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
+    <!-- 1. MAPPA -->
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity" />
 
-    <ImageButton
-        android:id="@+id/btnSettings"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="15dp"
-        android:background="@android:color/transparent"
-        android:src="@android:drawable/ic_menu_manage"
-        android:tint="#FFFFFF"
-        android:elevation="11dp" />
-
+    <!-- 2. HUD NAVIGAZIONE (ANCORATO IN CIMA) -->
     <LinearLayout
         android:id="@+id/navPanel"
         android:layout_width="match_parent"
@@ -29,10 +22,9 @@
         android:orientation="horizontal"
         android:background="#EE111111"
         android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        android:layout_toStartOf="@id/btnSettings"
         android:padding="15dp"
         android:elevation="10dp"
+        android:gravity="center_vertical"
         android:visibility="gone">
 
         <ImageView
@@ -40,7 +32,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@android:drawable/ic_menu_directions"
-            android:tint="#FFFFFF"/>
+            app:tint="#FFFFFF"
+            android:contentDescription="Direzione"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,10 +54,50 @@
                 android:layout_height="wrap_content"
                 android:text="Calcolo..."
                 android:textColor="#00FFFF"
-                android:textSize="13sp" />
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize="end"/>
         </LinearLayout>
     </LinearLayout>
 
+    <!-- 3. PULSANTI A DESTRA (SOTTO IL PANNELLO NAV) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:elevation="11dp"
+        android:gravity="center_horizontal">
+
+        <!-- Nota: Ho messo un marginTop fisso (100dp) o layout_below nel codice Kotlin
+             per evitare che saltino. Qui usiamo un margine sicuro. -->
+
+        <!-- Tasto Impostazioni -->
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/bg_round_button"
+            android:src="@android:drawable/ic_menu_manage"
+            app:tint="#FFFFFF"
+            android:contentDescription="Impostazioni"
+            android:layout_marginBottom="15dp"/>
+
+        <!-- Tasto GPS -->
+        <ImageButton
+            android:id="@+id/btnRecenter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_round_button"
+            android:src="@android:drawable/ic_menu_mylocation"
+            app:tint="#FFFFFF"
+            android:contentDescription="Centra Mappa" />
+    </LinearLayout>
+
+    <!-- 4. PANNELLO IN BASSO -->
     <LinearLayout
         android:id="@+id/bottomPanel"
         android:layout_width="match_parent"
@@ -77,17 +110,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- ICONA MODALITÀ (SENZA TINT = COLORI ORIGINALI) -->
+            <ImageView
+                android:id="@+id/imgCurrentMode"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_car_mode"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="Modalità Viaggio"/>
+
             <EditText
                 android:id="@+id/etAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Destinazione..."
+                android:hint="Dove andiamo?"
+                android:inputType="textPostalAddress"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#666666"
-                android:backgroundTint="#FFFFFF"/>
-            <Button android:id="@+id/btnGo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="VAI" />
+                android:backgroundTint="#FFFFFF"
+                android:autofillHints="postalAddress"/>
+
+            <Button
+                android:id="@+id/btnGo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VAI" />
         </LinearLayout>
 
         <Button
@@ -97,6 +148,15 @@
             android:text="CONNETTI ESP32"
             android:backgroundTint="#222222"
             android:layout_marginTop="5dp"/>
-        <TextView android:id="@+id/tvStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Google Maps Ready" android:textColor="#555555" android:textSize="10sp" android:textAlignment="center" android:paddingTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Google Maps Ready"
+            android:textColor="#555555"
+            android:textSize="10sp"
+            android:textAlignment="center"
+            android:paddingTop="4dp"/>
     </LinearLayout>
 </RelativeLayout>
