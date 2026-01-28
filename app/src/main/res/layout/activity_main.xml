@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="15dp"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/ic_menu_manage"
+        android:tint="#FFFFFF"
+        android:elevation="11dp" />
+
+    <LinearLayout
+        android:id="@+id/navPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#EE111111"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:layout_toStartOf="@id/btnSettings"
+        android:padding="15dp"
+        android:elevation="10dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imgTurnIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@android:drawable/ic_menu_directions"
+            android:tint="#FFFFFF"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp">
+            <TextView
+                android:id="@+id/tvNavDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--- m"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvNavInstruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calcolo..."
+                android:textColor="#00FFFF"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="#FF121212"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Destinazione..."
+                android:textColor="#FFFFFF"
+                android:textColorHint="#666666"
+                android:backgroundTint="#FFFFFF"/>
+            <Button android:id="@+id/btnGo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="VAI" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnConnectBle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CONNETTI ESP32"
+            android:backgroundTint="#222222"
+            android:layout_marginTop="5dp"/>
+        <TextView android:id="@+id/tvStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Google Maps Ready" android:textColor="#555555" android:textSize="10sp" android:textAlignment="center" android:paddingTop="4dp"/>
+    </LinearLayout>
+</RelativeLayout>
