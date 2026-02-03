@@ -46,17 +46,6 @@ The app is optimized for riding scenarios where quick glance navigation is criti
 5. Build and install APK
 
 ---
-
-## 🔗 Companion Firmware
-
-This app is designed to work with:
-
-👉 **VescNavigator ESP32 Firmware**
-
-(Separate repository)
-
----
-
 ## 👨‍💻 Author
 
 Ruggero Cadamuro  
